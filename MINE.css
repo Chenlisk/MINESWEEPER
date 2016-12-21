@@ -1,0 +1,33 @@
+table{
+                align:center;
+                table-layout:fixed; 
+            }
+            th
+            {               
+                font-size:24px;
+                font-family:BankGothic Md BT;
+                width:32px;
+                height:36px;
+                align:center;
+                overflow:hidden;
+                /*background-color:red;
+                background-image:2.bmp;
+                background-repeat:no-repeat;*/
+            }
+            #leftMenu{            
+                
+                height:620px;
+                width:120px;
+                float:left;
+            }
+            #mianUI{
+                height:620px;
+                width:1000px;
+                float:left;
+            }
+            #rightMenu{
+               
+                height:620px;
+                width:120px;
+                float:left;
+            }

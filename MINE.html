@@ -1,0 +1,35 @@
+﻿<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MINESWEEPER</title>
+        <script type="text/javascript" src="MINE.js"></script>
+        <link rel="stylesheet" type="text/css" href="mine.css">
+    </head>        
+    
+    <body background="apple2.png">
+        <diviv id="container" style="background-color:blue;">
+       		<!---------------------------------------------------------->
+            <div id="leftMenu">
+		         <form action style="font-family:Microsoft YaHei UI Light;font-size:20px;color:white;">
+		            <image src="xx.png" onclick="Display()"><br>
+		            <object id="backSound" height="10" width="10" data=""></object><br>
+		            <input type="radio" onchange="ChangeSize(1)">初级<br>
+		            <input type="radio" onchange="ChangeSize(2)">中级<br>
+		            <input type="radio" onchange="ChangeSize(3)">高级<br>
+		            <input type="radio" onchange="ChangeSize(0)">自定义<br>
+		        </form>       		
+        	</div>
+        	<!---------------------------------------------------------->
+        	<div id="mianUI">
+		        <script type="text/javascript">
+		            DrawTable();              
+		        </script>           		
+        	</div>
+      		<!---------------------------------------------------------->
+        	<div id="rightMenu">
+        		<textarea id="textArea" rows="3" cols="20"></textarea>
+        	</div>
+        	<!---------------------------------------------------------->
+        </div>
+    </body>
+</html>
