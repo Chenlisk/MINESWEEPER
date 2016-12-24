@@ -1,33 +1,61 @@
-table{
-                align:center;
-                table-layout:fixed; 
-            }
-            th
-            {               
-                font-size:24px;
-                font-family:BankGothic Md BT;
-                width:32px;
-                height:36px;
-                align:center;
-                overflow:hidden;
-                /*background-color:red;
-                background-image:2.bmp;
-                background-repeat:no-repeat;*/
-            }
-            #leftMenu{            
-                
-                height:620px;
-                width:120px;
-                float:left;
-            }
-            #mianUI{
-                height:620px;
-                width:1000px;
-                float:left;
-            }
-            #rightMenu{
-               
-                height:620px;
-                width:120px;
-                float:left;
-            }
+table {   
+    border: 6px solid black; 
+    margin: 0 auto; 
+    cursor: pointer;
+    border-collapse: collapse;
+    /*border-collapse: separate;*/
+    /*border-spacing: 1px; */
+    table-layout:fixed;
+    word-break:break-all;
+    border-color: #888888;
+    background-color: #cccccc;
+}
+td {
+    border: 1px solid gray;
+    font-size: 24px;
+    font-family: BankGothic Md BT;   
+    width: 32px;
+    height: 36px;
+    text-align: center;
+    overflow: hidden;
+}
+#radioGroup{
+    color: white;
+    /*background-color: yellow;*/
+    font-size: 20px;
+    font-family: Microsoft YaHei UI;
+}
+#refresh{
+    width:40px;
+    height:40px; 
+}
+#SelectZone{
+    /*background-color: cyan;*/
+}
+/*.radioBox{
+    height: 30px;
+    font-size: 24px;
+    color: cyan;
+}*/
+#Top {
+    height: 15px;
+    /*background-color: red;    */
+}
+#mianUI {
+    height: 620px;
+    width: 1150px;
+    float: left;
+    /*background-color: blue;*/
+}
+#rightMenu {
+    height: 600px;
+    width: 120px;
+    float: left;
+    /*background-color: purple;*/
+}
+.Text{
+    color: black;
+    height: 5px;
+    text-align: left;
+    /*background-color: yellow;*/
+}

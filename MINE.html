@@ -4,32 +4,37 @@
         <title>MINESWEEPER</title>
         <script type="text/javascript" src="MINE.js"></script>
         <link rel="stylesheet" type="text/css" href="mine.css">
-    </head>        
+    </head>
     
-    <body background="apple2.png">
-        <diviv id="container" style="background-color:blue;">
-       		<!---------------------------------------------------------->
-            <div id="leftMenu">
-		         <form action style="font-family:Microsoft YaHei UI Light;font-size:20px;color:white;">
-		            <image src="xx.png" onclick="Display()"><br>
-		            <object id="backSound" height="10" width="10" data=""></object><br>
-		            <input type="radio" onchange="ChangeSize(1)">初级<br>
-		            <input type="radio" onchange="ChangeSize(2)">中级<br>
-		            <input type="radio" onchange="ChangeSize(3)">高级<br>
-		            <input type="radio" onchange="ChangeSize(0)">自定义<br>
-		        </form>       		
-        	</div>
-        	<!---------------------------------------------------------->
-        	<div id="mianUI">
+    <body background="background/apple2.png">
+        <diviv id="container">       		
+            <div id="Top">   
+        	</div>        
+        	<div id="mianUI" onselectstart="return false">
 		        <script type="text/javascript">
-		            DrawTable();              
-		        </script>           		
-        	</div>
-      		<!---------------------------------------------------------->
+		            DrawTable(1);     
+		        </script>
+        	</div>      		
         	<div id="rightMenu">
-        		<textarea id="textArea" rows="3" cols="20"></textarea>
-        	</div>
-        	<!---------------------------------------------------------->
+				<object id="backSound" height="0px" data=""></object><br>    
+				<img id="refresh" src="img/fresh.png" onclick="ReSize(-1)"></img>
+				<div id="SelectZone">
+					<form id="radioGroup">
+						<a>选择级别</a><br>																								
+						<input type="radio" name="level" onclick="ReSize(1)" checked="true">初级<br>
+						<input type="radio" name="level" onclick="ReSize(2)">中级<br>
+						<input type="radio" name="level" onclick="ReSize(3)">高级<br>
+						<input type="radio" name="level" onclick="ReSize(0)">自定义<br>
+					</form>   
+ 					<form id="Textarea">
+						<input id="numb"><br>
+						<input id="n2umb">
+					</form>  
+				</div>
+				<p id="Timer"   class="Text">0 </p><br>			
+				<p id="console" class="Text">$:</p><br>
+				<button onclick="Customize()">XXX</button>
+        	</div>        	
         </div>
     </body>
 </html>
