@@ -6,35 +6,50 @@
         <link rel="stylesheet" type="text/css" href="mine.css">
     </head>
     
-    <body background="background/apple2.png">
+    <body background="background/apple2.png" onload="DisplayInit()">
         <diviv id="container">       		
             <div id="Top">   
         	</div>        
-        	<div id="mianUI" onselectstart="return false">
+			<!--<div id="leftMenu">   
+				<img src="apple1.png"></img>
+        	</div>      -->
+        	<!--<div id="mianUI" onselectstart="return false">
 		        <script type="text/javascript">
 		            DrawTable(1);     
 		        </script>
-        	</div>      		
-        	<div id="rightMenu">
+        	</div>      		-->
+			
+        	<div id="leftMenu">
 				<object id="backSound" height="0px" data=""></object><br>    
-				<img id="refresh" src="img/fresh.png" onclick="ReSize(-1)"></img>
+				<img id="refresh" class="img" src="img/fresh.png" onclick="ReSize(-1)"></img>
+				<img id="state"   class="img" src=""></img>
 				<div id="SelectZone">
 					<form id="radioGroup">
 						<a>选择级别</a><br>																								
 						<input type="radio" name="level" onclick="ReSize(1)" checked="true">初级<br>
 						<input type="radio" name="level" onclick="ReSize(2)">中级<br>
 						<input type="radio" name="level" onclick="ReSize(3)">高级<br>
-						<input type="radio" name="level" onclick="ReSize(0)">自定义<br>
+						<!--<input type="radio" name="level" onclick="ReSize(0)">自定义<br>-->
 					</form>   
- 					<form id="Textarea">
-						<input id="numb"><br>
-						<input id="n2umb">
-					</form>  
 				</div>
-				<p id="Timer"   class="Text">0 </p><br>			
-				<p id="console" class="Text">$:</p><br>
-				<button onclick="Customize()">XXX</button>
-        	</div>        	
+				<div id="information">
+					<a id="Timer"    class="Text"></a><br>	
+					<a id="MineNum"  class="Text"></a><br>	
+					<a id="ClickTimes" class="Text"></a><br>
+					<a id="TheRest"  class="Text"></a><br><br>	
+					<a id="RankList" class="Text">RankList</a><br>	
+					<a id="Primary"  class="Text"></a><br>	
+					<a id="Middle"   class="Text"></a><br>	
+					<a id="Senior"   class="Text"></a><br>						
+				</div>
+        	</div>   
+
+			<div id="mianUI" onselectstart="return false">
+		        <script type="text/javascript">
+		            DrawTable(1);     
+		        </script>
+        	</div>  
+
         </div>
     </body>
 </html>

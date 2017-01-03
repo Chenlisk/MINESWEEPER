@@ -2,10 +2,10 @@
 
 var Level;
 var MINE = 9;
-var firstClick = 0;
-var ClickTimes = 0;
-var IsDead = false;
-var IsWin = false;
+var firstClick;
+var ClickTimes;
+var IsDead;
+var IsWin;
 var TX;
 var TY;
 var MineNum;
@@ -15,17 +15,30 @@ var Zone;
 var State;
 var MyTimer;
 var TimeSum;
+var PrimaryScore=0;
+var MiddleScore=0;
+var SeniorScore=0;
 var ColorArray = new Array('#f7f7f5', '#0000ff', '#008000', '#ff0000', '#000080', '#800000', '#008080', '#000000', '#808080', '#000000');
 
 function ReSize(x){
    var mainUI=Element("mianUI");
     PlaySound(4);
     TimerStop();
-    Element("Timer").innerHTML="0";
-    Element("console").innerHTML = "ClickTimes:" + ClickTimes + "  \n";
 
     mainUI.removeChild(Element("tableOfMine"));   
     DrawTable(x);
+    DisplayInit();
+}
+
+function DisplayInit(){
+    Element("state").src="img/smile.gif";
+    DisplayInfo("MineNum","MineNum",MineNum);    
+    DisplayInfo("Timer","TIME",TimeSum);
+    DisplayInfo("ClickTimes","ClickTimes",ClickTimes);
+    DisplayInfo("TheRest","TheRest",(TX*TY-MineNum-ClickTimes));  
+    DisplayInfo("Primary","Primary",PrimaryScore);
+    DisplayInfo("Middle","Middle",MiddleScore);
+    DisplayInfo("Senior","Senior",SeniorScore);
 }
 
 function DrawTable(x) {
@@ -46,11 +59,12 @@ function DrawTable(x) {
 }
 
 function Customize(){
-    // var SZone=Element("SelectZone");
-    // var textBox=document.createElement('form');
 }
 
-function SetLevel(Level){
+
+function SetLevel(le){
+    if(le<=3 && le>=0)
+        Level=le;
     switch(Level){
         case 0:Customize();break;
         case 1:TX =  9; TY =  9; MineNum = 10; break;
@@ -65,6 +79,7 @@ function SetLevel(Level){
 
     firstClick = 0;
     ClickTimes = 0;
+    TimeSum = 0;
     IsDead = false;
     IsWin = false;
 }
@@ -81,10 +96,10 @@ function Initial() {
 }
 
 function Response(x) {
+    x=parseInt(x.substring(5));
+
     if (IsWin == true || IsDead == true || State[x-1]==1)
         return;
-
-    x=parseInt(x.substring(5));
 
     if (firstClick == 0) {
         firstClick = x;
@@ -96,12 +111,32 @@ function Response(x) {
     if (ClickTimes == TX * TY - MineNum) {//Succeed
         PlaySound(3);
         TimerStop();
+        Element("state").src="img/cool.gif";
         IsWin = true;
         for (var i = 0; i < TX * TY; i++) {
             if (MineArray[i] == MINE) {
                 ++i;
                 Element("Cell_" + i--).style.backgroundColor = ColorArray[2];
             }
+        }
+        switch(Level){
+            case 1:
+                if(TimeSum<PrimaryScore || PrimaryScore==0)
+                    PrimaryScore = TimeSum;
+                DisplayInfo("Primary","Primary",PrimaryScore);
+                break;
+            case 2:
+                if(TimeSum<MiddleScore || MiddleScore==0)
+                    MiddleScore = TimeSum;
+                DisplayInfo("Middle","Middle",MiddleScore);
+                break;                      
+            case 3:
+                if(TimeSum<SeniorScore || SeniorScore==0)
+                    SeniorScore = TimeSum;
+                DisplayInfo("Senior","Senior",SeniorScore);
+                break;                                
+            default:
+                break;
         }
     }
 
@@ -130,13 +165,13 @@ function PlaySound(x) {
 
 function TimerStart() {
     TimeSum=0;
-    Element("Timer").innerHTML = ++TimeSum;
+    DisplayInfo("Timer","TIME",++TimeSum);
     MyTimer = setInterval(function () { TimeOut(); }, 1000);
 }
 
 function TimeOut() {
     if(TimeSum<999)
-        Element("Timer").innerHTML = ++TimeSum;
+        DisplayInfo("Timer","TIME",++TimeSum);
 }
 
 function TimerStop() {
@@ -160,17 +195,22 @@ function Click(x) {
         }
         IsDead = true;
         PlaySound(2);
+        Element("state").src="img/cry.gif";
         TimerStop();        
-    } else if (MineArray[x] != 0) { //Clicked Number
+    } 
+    else if (MineArray[x] != 0) { //Clicked Number
         State[x] = 1;
         ClickTimes++;
-        Element("console").innerHTML = "ClickTimes:" + ClickTimes + "  \n";
         object.innerHTML = MineArray[x];
+        DisplayInfo("ClickTimes","ClickTimes",ClickTimes);
+        DisplayInfo("TheRest","TheRest",(TX*TY-MineNum-ClickTimes));     
         PlaySound(1);
-    } else {                        //Clicked Blank
+    } 
+    else {                        //Clicked Blank
         State[x] = 1;
         ClickTimes++;
-        Element("console").innerHTML = "ClickTimes:" + ClickTimes + "  \n";
+        DisplayInfo("ClickTimes","ClickTimes",ClickTimes);
+        DisplayInfo("TheRest","TheRest",(TX*TY-MineNum-ClickTimes));        
     }
 }
 
@@ -240,33 +280,8 @@ function CleanZone(x) {
     }
 }
 
-function ChangeSize(x) {
-    /*    switch(x){
-        case 0:;break;//DrawTable()
-        case 1:TX=9;TY=9;MineNum=10;break;
-        case 2:TX=16;TY=16;MineNum=40;break;
-        case 3:TX=30;TY=16;MineNum=99;break;
-    } 
-//    DrawTable();
- //   SetMine();
- //   Display();
-   // window.location.reload(); */
-}
-
-function Display() {
-    var object;
-    for (var i = 0; i < TX * TY; i++) {
-        object = Element("Cell_" + (i + 1));
-        object.style.color = ColorArray[MineArray[i]];
-        object.style.backgroundColor = ColorArray[0];
-        //object.style.background = "1.bmp";
-        if (MineArray[i] == MINE)
-            object.innerHTML = "*";
-        else if (MineArray[i] != 0)
-            object.innerHTML = MineArray[i];
-        else
-        ;
-    }
+function DisplayInfo(obj,info,data) {
+    Element(obj).innerHTML = (" "+info+" : " + data);
 }
 
 function SetMine() {
